@@ -31,13 +31,8 @@
         <h2 class="form-signin-heading">请登录</h2>
         <!--<input type="email" id="inputEmail" class="form-control" placeholder="账号ID" required autofocus />-->
         <!--<input type="password" id="inputPassword" class="form-control" placeholder="密码" required />-->
-        <input type="text" id="account" class="form-control" placeholder="账号ID"  />
-        <input type="password" id="password" class="form-control" placeholder="密码"  />
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"/>记住我
-          </label>
-        </div>
+        <input type="text" id="account" class="form-control" placeholder="账号ID" value="phaeton"  />
+        <input type="password" id="password" class="form-control" placeholder="密码" value="970108"  />
         <button id="login" class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
       </form>
 
@@ -58,13 +53,10 @@
                 type:'post',
                 success:function (res) {
                     if (res.flag){
-                        alert('111');
+                        window.location.href="goods";
                     }else{
                         alert(res.msg);
                     }
-                },
-                error:function () {
-                    alert('222')
                 }
             })
         })

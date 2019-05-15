@@ -1,5 +1,6 @@
 package com.graduation.manage.aspect;
 
+import com.graduation.manage.entity.User;
 import com.graduation.manage.service.UserService;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -29,8 +30,8 @@ public class LoginAOP {
         //获取request
         HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         HttpSession session = request.getSession();
-        String account = (String) session.getAttribute("account");
-        if (account == null){
+        User user = (User) session.getAttribute("user");
+        if (user == null){
             throw new RuntimeException("请先登陆");
         }
     }

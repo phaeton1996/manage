@@ -1,5 +1,6 @@
 package com.graduation.manage.controller;
 
+import com.graduation.manage.entity.User;
 import com.graduation.manage.service.UserService;
 import com.graduation.manage.utils.MD5Util;
 import com.graduation.manage.vo.Result;
@@ -18,21 +19,24 @@ public class Main {
     private UserService userService;
 
     @RequestMapping("/loginPage")
-    public String toLoginPage(){
+    public String toLoginPage() {
         return "login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     @ResponseBody
     public Result login(String account, String password, HttpServletRequest request) {
         if (account == null || password == null || "".equals(account) && "".equals(password)) {
             return Result.error("参数错误");
         }
-        int res = userService.login(account, MD5Util.MD5Hex(password));
-        if (res != 1){
-            return Result.error("账号密码错误");
+        User user = userService.getByAccount(account);
+        if (user == null) {
+            return Result.error("此账号不存在");
         }
-        userService.setLoginSession(account,request);
+        if (!user.getPassword().equals(MD5Util.MD5Hex(password))) {
+            return Result.error("密码错误");
+        }
+        userService.setLoginSession(user, request);
         return Result.success();
     }
 
