@@ -13,7 +13,7 @@ public interface GoodsDao {
     @Select({"<script>",
             "SELECT g.*,c.name AS 'category_name' FROM goods g ,goods_category c where g.category_id = c.id ",
             "<when test='keywords!=null'>",
-            "and g.name like #{keywords}",
+            "and g.name like CONCAT('%',#{keywords},'%') ",
             "</when>",
             "ORDER BY start_time",
             "</script>"})
