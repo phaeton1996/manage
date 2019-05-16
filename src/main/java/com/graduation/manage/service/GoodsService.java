@@ -13,8 +13,8 @@ public class GoodsService {
     @Autowired
     private GoodsDao goodsDao;
 
-    public List<Goods> getGoodsList(){
-        return goodsDao.getGoodsList();
+    public List<Goods> getGoodsList(String keywords){
+        return goodsDao.getGoodsList(keywords);
     }
 
 }

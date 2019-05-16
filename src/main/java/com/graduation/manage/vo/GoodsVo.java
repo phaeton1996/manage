@@ -6,7 +6,7 @@ public class GoodsVo {
 
     private int pageSize = 4;
 
-    private String keywords = "";
+    private String keywords;
 
     public int getPageNum() {
         return pageNum;

@@ -21,17 +21,21 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping("/goods")
-    public String toGoods(HttpServletRequest request, ModelMap modelMap, GoodsVo goodsVo){
-        HttpSession session = request.getSession();
-        User user = (User)session.getAttribute("user");
-        modelMap.addAttribute("user",user);
-
+    @RequestMapping("/goodslist")
+    public String toGoodsList(ModelMap modelMap, GoodsVo goodsVo){
         PageHelper.startPage(goodsVo.getPageNum(),goodsVo.getPageSize());
-        List<Goods> goodsList = goodsService.getGoodsList();
+        List<Goods> goodsList = goodsService.getGoodsList(goodsVo.getKeywords());
         PageInfo<Goods> pageInfo = new PageInfo<>(goodsList);
         modelMap.addAttribute("goodsList",goodsList);
         modelMap.addAttribute("pageInfo",pageInfo);
+        return "goodslist";
+    }
+
+    @RequestMapping("/goods")
+    public String toGoodsList(HttpServletRequest request, ModelMap modelMap){
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        modelMap.addAttribute("user",user);
         return "goods";
     }
 }

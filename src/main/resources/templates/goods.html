@@ -33,16 +33,15 @@
             <!-- 搜索框 -->
             <div class="row" style="margin-bottom: 15px">
                 <div class="col-md-2" style="width:150px">
-                    <select id="select" name="select" class="form-control" disabled="disabled">
-                        　　
+                    <select name="select" class="form-control" disabled="disabled">
                         <option>商品名</option>
                     </select>
                 </div><!-- /.col-lg-6 -->
                 <div class="col-md-3">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for..."/>
+                        <input id="keywords" type="text" class="form-control" placeholder="Search for..."/>
                         <span class="input-group-btn">
-              <button class="btn btn-default" type="button">搜索</button>
+              <button class="btn btn-default" id="search" type="button">搜索</button>
             </span>
                     </div><!-- /input-group -->
                 </div><!-- /.col-lg-6 -->
@@ -50,81 +49,7 @@
             </div><!-- /.row -->
             <!-- 搜索框 -->
 
-            <!-- 表格 -->
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th class="col-md-1">商品编号</th>
-                    <th>商品名</th>
-                    <th class="col-md-2">秒杀开始时间</th>
-                    <th class="col-md-1">秒杀价格</th>
-                    <th class="col-md-1">类型</th>
-                    <th class="col-md-1">库存</th>
-                    <th class="col-md-1">状态</th>
-                    <th class="col-md-1">操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="goods,list:${goodsList}">
-                    <td th:text="${list.index + 1}"></td>
-                    <td th:text="${goods.name}"></td>
-                    <td th:text="${#dates.format(goods.startTime,'yyyy-MM-dd HH:mm')}"></td>
-                    <td th:text="${goods.seckillPrice}"></td>
-                    <td th:text="${goods.categoryName}"></td>
-                    <td th:text="${goods.stocks}"></td>
-                    <td th:text="${goods.status == 1?'上架中':'已下架'}"></td>
-                    <td>
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-sm dropdown-toggle " data-toggle="dropdown"
-                                    aria-haspopup="true" aria-expanded="false">
-                                商品操作 <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li id="test"><a href="#">修改商品</a></li>
-                                <li><a href="#">下架商品</a></li>
-                                <li><a href="#">删除商品</a></li>
-                            </ul>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            <!-- 表格 -->
-
-            <!-- 分页 -->
-            <ul class="pagination pull-right">
-                <li>
-                    <a th:href="${'goods?pageNum='+ (pageInfo.hasPreviousPage?pageInfo.prePage:'1')}">上一页</a>
-                </li>
-                <li th:if="${(pageInfo.pageNum)>2}">
-                    <a th:href="${'goods?pageNum='+(pageInfo.pageNum)-2}"
-                       th:text="${((pageInfo.pageNum)-2)}"
-                    ></a>
-                </li>
-                <li th:if="${(pageInfo.pageNum)>1}">
-                    <a th:href="${'goods?pageNum='+(pageInfo.pageNum)-1}"
-                       th:text="${(pageInfo.pageNum)-1}"
-                    ></a>
-                </li>
-                <li>
-                    <a th:text="${(pageInfo.pageNum)}"></a>
-                </li>
-                <li th:if="${pageInfo.getLastPage()>pageInfo.pageNum}">
-                    <a th:href="${'goods?pageNum='+(pageInfo.pageNum)+1}"
-                       th:text="${(pageInfo.pageNum)+1}"
-                    ></a>
-                </li>
-                <li th:if="${(pageInfo.getLastPage()-1) >pageInfo.pageNum }">
-                    <a th:href="${'goods?pageNum='+(pageInfo.pageNum)+2}"
-                       th:text="${(pageInfo.pageNum)+2}"
-                    ></a>
-                </li>
-                <li>
-                    <a th:href="${'goods?pageNum='+ (pageInfo.isHasNextPage()?pageInfo.nextPage:pageInfo.getLastPage())}">
-                        下一页</a>
-                </li>
-            </ul>
-            <!-- 分页 -->
+            <div id="placeholder"></div>
 
             <!-- 修改详情模态框 -->
             <div class="modal fade" id="GoodsModifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -366,6 +291,6 @@
 <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
 <!-- 本页的脚本 -->
-<script type="text/javascript" src="js/goodsmanagement.js"></script>
+<script type="text/javascript" src="js/goods.js"></script>
 </body>
 </html>

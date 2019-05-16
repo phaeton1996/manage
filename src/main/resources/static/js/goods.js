@@ -58,10 +58,34 @@
         $('#endTimeInput').val("YYYY-MM-DD hh:mm");
     }
 
+    var keywords = '';
+
+    $('#search').click(function () {
+        keywords = $('#keywords').val();
+        toPage(1);
+    });
+
+    function toPage(page) {
+        page = page==null?1:page;
+        var url;
+        if (keywords == ''){
+            url = '/manage/goodslist?pageNum='+page;
+        }else{
+            url = '/manage/goodslist?pageNum='+page +'&keywords='+keywords;
+        }
+        $.ajax({
+            url:url ,
+            type:'get',
+            success:function (res) {
+                $('#placeholder').html(res);
+            }
+        });
+    }
+
 $(function () {
+    toPage(1);
     // 初始化时间选择器控件
     datetimepickerInit();
-    
 });   
 
 
