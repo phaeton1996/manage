@@ -1,9 +1,9 @@
 package com.graduation.manage.dao;
 
+import com.graduation.manage.entity.Goods;
 import com.graduation.manage.entity.User;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -23,4 +23,16 @@ public interface UserDao {
      */
     @Select("select * from user where account = #{account} and role = 1 ")
     User getByAccount(@Param("account") String account);
+
+    @Select("SELECT * FROM user")
+    List<User> getGoodsList();
+
+    @Update("UPDATE user SET " +
+            "status = status * (-1)" +
+            "WHERE id = #{id}")
+    int cstatus(int id);
+
+    @Delete("DELETE FROM user " +
+            "WHERE id = #{id}")
+    int delete(int id);
 }

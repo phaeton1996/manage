@@ -1,12 +1,69 @@
     /**
      * 修改商品模态框
      */
-    $("#test").click(function () {
+    function modify(num) {
         // ajax获取并填充
+        $.ajax({
+            url:"/manage/goods/id/"+num,
+            type:'GET',
+            success:function (res) {
+                renderModal(res);
+            }
+        });
+
         $("#GoodsModifyModal").modal({
             backdrop: "static"
         });
+
+    }
+    function renderModal(res) {
+        $('#name').val(res.name);
+        $('#id').val(res.id);
+        $('#seckillPrice').val(res.seckillPrice);
+        $('#stocks').val(res.stocks);
+        $('#imgUrl').attr("src",res.imgUrl);
+        $('#descr').val(res.descr);
+        $('#startTimeInput').val(res.startTime);
+        $('#endTimeInput').val(res.endTime);
+    }
+    $('#submit').click(function () {
+        var form = $('#GoodsModifyModal form').serialize();
+        $.ajax({
+            url:'/manage/goods/modify',
+            data:form,
+            type:'POST',
+            success:function (res) {
+                alert(res?'success':'false')
+            }
+        });
     });
+
+    function del(id) {
+        $.ajax({
+            url:'/manage/goods/delete',
+            data:{
+                id:id
+            },
+            type:'GET',
+            success:function (res) {
+                alert(res?'success':'false')
+            }
+        });
+    }
+
+    function sellout(id) {
+        $.ajax({
+            url:'/manage/goods/sellout',
+            data:{
+                id:id
+            },
+            type:'GET',
+            success:function (res) {
+                alert(res?'success':'false')
+            }
+        });
+    }
+
 
     /**
      * 添加商品模态框
@@ -82,10 +139,6 @@
         });
     }
 
-$(function () {
-    toPage(1);
-    // 初始化时间选择器控件
-    datetimepickerInit();
-});   
+
 
 

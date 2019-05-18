@@ -1,5 +1,7 @@
 package com.graduation.manage.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class User {
@@ -16,6 +18,7 @@ public class User {
 
     private int status;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone="GMT+8")
     private Date createTime;
 
     private int role;

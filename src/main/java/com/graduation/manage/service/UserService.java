@@ -1,12 +1,14 @@
 package com.graduation.manage.service;
 
 import com.graduation.manage.dao.UserDao;
+import com.graduation.manage.entity.Goods;
 import com.graduation.manage.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 public class UserService {
@@ -28,5 +30,15 @@ public class UserService {
     }
 
 
+    public List<User> getGoodsList() {
+        return userDao.getGoodsList();
+    }
 
+    public int cstatus(int id) {
+        return userDao.cstatus(id);
+    }
+
+    public int delete(int id) {
+        return userDao.delete(id);
+    }
 }

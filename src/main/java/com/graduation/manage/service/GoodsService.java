@@ -17,4 +17,19 @@ public class GoodsService {
         return goodsDao.getGoodsList(keywords);
     }
 
+    public Goods getById(int id){
+        return goodsDao.getById(id);
+    }
+
+    public int modify(Goods goods){
+        return goodsDao.modify(goods);
+    }
+
+    public int sellout(int id){
+        return goodsDao.sellout(id);
+    }
+
+    public int delete(int id){
+        return goodsDao.delete(id);
+    }
 }

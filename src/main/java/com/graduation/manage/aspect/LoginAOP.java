@@ -12,15 +12,13 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-@Component
-@Aspect
+//@Component
+//@Aspect
 public class LoginAOP {
-
-
     /* 切点 */
     @Pointcut("execution(* com.graduation.manage.controller.AOP.*.*())")
     public void loginCheck() {
-        System.out.println("...");
+        System.out.println(".............................");
     }
 
     /* 前置通知 */

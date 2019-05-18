@@ -4,35 +4,28 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th class="col-md-1">商品编号</th>
-        <th>商品名</th>
-        <th class="col-md-2">秒杀开始时间</th>
-        <th class="col-md-1">秒杀价格</th>
-        <th class="col-md-1">类型</th>
-        <th class="col-md-1">库存</th>
-        <th class="col-md-1">状态</th>
-        <th class="col-md-1">操作</th>
+        <th class="col-md-2">账号</th>
+        <th class="col-md-2">用户名</th>
+        <th class="col-md-4">创建时间</th>
+        <th class="col-md-2">状态</th>
+        <th class="col-md-2">操作</th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="goods,list:${goodsList}">
-        <td th:text="${list.index + 1}"></td>
-        <td th:text="${goods.name}"></td>
-        <td th:text="${#dates.format(goods.startTime,'yyyy-MM-dd HH:mm')}"></td>
-        <td th:text="${goods.seckillPrice}"></td>
-        <td th:text="${goods.categoryName}"></td>
-        <td th:text="${goods.stocks}"></td>
-        <td th:text="${goods.status == 1?'上架中':'已下架'}"></td>
+    <tr th:each="user,list:${userList}">
+        <td th:text="${user.account}"></td>
+        <td th:text="${user.userName}"></td>
+        <td th:text="${#dates.format(user.createTime,'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${user.status == 1?'用户正常':'用户停用'}"></td>
         <td>
             <div class="btn-group">
                 <button type="button" class="btn btn-sm dropdown-toggle " data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
-                    商品操作 <span class="caret"></span>
+                    用户操作 <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li th:onclick="'javascript:modify(\''+${goods.id}+'\')'"><a href="#">修改商品</a></li>
-                    <li th:onclick="'javascript:sellout(\''+${goods.id}+'\')'"><a href="#">上架/下架商品</a></li>
-                    <li th:onclick="'javascript:del(\''+${goods.id}+'\')'"><a href="#">删除商品</a></li>
+                    <li th:onclick="'javascript:cstatus(\''+${user.id}+'\')'"><a href="#">用户启用/停用</a></li>
+                    <li th:onclick="'javascript:del(\''+${user.id}+'\')'"><a href="#">删除用户</a></li>
                 </ul>
             </div>
         </td>
@@ -78,5 +71,5 @@
 
 
 <!-- 本页的脚本 -->
-<script type="text/javascript" src="js/goods.js"></script>
+<script type="text/javascript" src="js/user.js"></script>
 </html>

@@ -4,7 +4,7 @@ public class GoodsVo {
 
     private int pageNum = 1;
 
-    private int pageSize = 4;
+    private int pageSize = 5;
 
     private String keywords;
 
