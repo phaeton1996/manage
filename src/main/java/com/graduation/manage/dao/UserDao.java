@@ -24,8 +24,13 @@ public interface UserDao {
     @Select("select * from user where account = #{account} and role = 1 ")
     User getByAccount(@Param("account") String account);
 
-    @Select("SELECT * FROM user")
-    List<User> getGoodsList();
+    @Select({"<script>",
+            "SELECT * FROM user",
+            "<when test='keywords!=null'>",
+            "where user_name like CONCAT('%',#{keywords},'%') ",
+            "</when>",
+            "</script>"})
+    List<User> getGoodsList(@Param("keywords") String keywords);
 
     @Update("UPDATE user SET " +
             "status = status * (-1)" +

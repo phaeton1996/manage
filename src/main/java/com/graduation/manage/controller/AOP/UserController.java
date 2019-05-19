@@ -23,9 +23,9 @@ public class UserController {
     UserService userService;
 
     @RequestMapping("/userlist")
-    public String toUserList(ModelMap modelMap, Integer pageNum) {
+    public String toUserList(ModelMap modelMap, Integer pageNum,String keywords) {
         PageHelper.startPage(pageNum, 5);
-        List<User> userList = userService.getGoodsList();
+        List<User> userList = userService.getGoodsList(keywords);
         PageInfo<User> pageInfo = new PageInfo<>(userList);
         modelMap.addAttribute("userList", userList);
         modelMap.addAttribute("pageInfo", pageInfo);

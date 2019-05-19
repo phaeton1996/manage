@@ -30,8 +30,8 @@ public class UserService {
     }
 
 
-    public List<User> getGoodsList() {
-        return userDao.getGoodsList();
+    public List<User> getGoodsList(String keywords) {
+        return userDao.getGoodsList(keywords);
     }
 
     public int cstatus(int id) {

@@ -1,6 +1,14 @@
+var keywords = '';
+
 function toPage(page) {
     page = page==null?1:page;
-    var url = '/manage/userlist?pageNum='+page;
+    var url;
+    if (keywords == ''){
+        url = '/manage/userlist?pageNum='+page;
+    }else{
+        url = '/manage/userlist?pageNum='+page +'&keywords='+keywords;
+    }
+
     $.ajax({
         url:url ,
         type:'get',
@@ -22,6 +30,12 @@ function del(id) {
         }
     });
 }
+
+
+$('#search').click(function () {
+    keywords = $('#keywords').val();
+    toPage(1);
+});
 
 function cstatus(id) {
     $.ajax({

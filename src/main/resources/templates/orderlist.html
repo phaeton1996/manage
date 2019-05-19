@@ -1,0 +1,82 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!-- 表格 -->
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th class="col-md-1">订单编号</th>
+        <th>商品名</th>
+        <th class="col-md-2">创建时间</th>
+        <th class="col-md-1">交易金额</th>
+        <th class="col-md-1">创建用户</th>
+        <th class="col-md-1">数量</th>
+        <th class="col-md-1">状态</th>
+        <th class="col-md-1">操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order,list:${orderList}">
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.goods.name}"></td>
+        <td th:text="${#dates.format(order.createTime,'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${order.goods.seckillPrice}">6800.00</td>
+        <td th:text="${order.addr.userName}">vistor</td>
+        <td>1</td>
+        <td>已支付</td>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm dropdown-toggle " data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    订单操作 <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">设为异常</a></li>
+                    <li><a href="#">取消订单</a></li>
+                    <li><a href="#">删除订单</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<!-- 表格 -->
+
+<!-- 分页 -->
+<ul class="pagination pull-right">
+    <li>
+        <a th:href="${'goods?pageNum='+ (pageInfo.hasPreviousPage?pageInfo.prePage:'1')}">上一页</a>
+    </li>
+    <li th:if="${(pageInfo.pageNum)>2}">
+        <a th:onclick="'javascript:toPage('+${(pageInfo.pageNum -2)}+')'"
+           th:text="${((pageInfo.pageNum)-2)}"
+        ></a>
+    </li>
+    <li th:if="${(pageInfo.pageNum)>1}">
+        <a th:onclick="'javascript:toPage('+${(pageInfo.pageNum -1)}+')'"
+           th:text="${(pageInfo.pageNum)-1}"
+        ></a>
+    </li>
+    <li>
+        <a th:text="${(pageInfo.pageNum)}"></a>
+    </li>
+    <li th:if="${pageInfo.getLastPage()>pageInfo.pageNum}">
+        <a th:onclick="'javascript:toPage('+${(pageInfo.pageNum +1)}+')'"
+           th:text="${(pageInfo.pageNum)+1}"
+        ></a>
+    </li>
+    <li th:if="${(pageInfo.getLastPage()-1) >pageInfo.pageNum }">
+        <a th:onclick="'javascript:toPage('+${(pageInfo.pageNum +2)}+')'"
+           th:text="${(pageInfo.pageNum)+2}"
+        ></a>
+    </li>
+    <li>
+        <a th:href="${'goods?pageNum='+ (pageInfo.isHasNextPage()?pageInfo.nextPage:pageInfo.getLastPage())}">
+            下一页</a>
+    </li>
+</ul>
+<!-- 分页 -->
+
+<!-- 本页的脚本 -->
+<script type="text/javascript" src="js/order.js"></script>
+</html>
